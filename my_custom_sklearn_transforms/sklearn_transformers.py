@@ -20,8 +20,14 @@ class DropColumns(BaseEstimator, TransformerMixin):
     
   
 class NotaZerada():
-    def transform(self, X):
+    def __init__(self, columns):
+        self=None
 
+    def fit(self, X, y=None):
+        return self
+    
+    def transform(self, X):
+        
         nota=[[],[],[],[]]
 
         for i in range(len(X['NOTA_DE'])):
@@ -55,6 +61,12 @@ class NotaZerada():
 
 
 class ReprovacaoBinaria():
+    def __init__(self, columns):
+        self=None
+
+    def fit(self, X, y=None):
+        return self
+    
     def transform(self, X):
         data=X.copy()
         data['REPROVACOES_DE']=data['REPROVACOES_DE'].map({0:0,1:1,2:1,3:1,4:1,5:1,6:1,7:1,8:1,9:1,10:1})
