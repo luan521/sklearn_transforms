@@ -29,7 +29,6 @@ class NotaZerada():
     
     def transform(self, X):
         data = X.copy()
-        data.index=range(len(data))
         nota=[[],[],[],[]]
 
         for i in range(len(data['NOTA_DE'])):
@@ -131,55 +130,56 @@ class DadosNulos():
        
         new_data=[[],[],[],[],[],[],[],[],[],[],[]]
         
-
-        for i in range(len(X['REPROVACOES_DE'])):
-            if not(X['REPROVACOES_DE'][i] <=0 or X['REPROVACOES_DE'][i] >0) :
+        data = X.copy()
+        data.index=range(len(data))
+        
+        for i in range(len(data['REPROVACOES_DE'])):
+            if not(data['REPROVACOES_DE'][i] <=0 or data['REPROVACOES_DE'][i] >0) :
                 new_data[0].append(0)
             else:
-                new_data[0].append(X['REPROVACOES_DE'][i])
-            if not(X['REPROVACOES_EM'][i] <=0 or X['REPROVACOES_EM'][i] >0) :
+                new_data[0].append(data['REPROVACOES_DE'][i])
+            if not(data['REPROVACOES_EM'][i] <=0 or data['REPROVACOES_EM'][i] >0) :
                 new_data[1].append(0)
             else:
-                new_data[1].append(X['REPROVACOES_EM'][i])
-            if not(X['REPROVACOES_MF'][i] <=0 or X['REPROVACOES_MF'][i] >0) :
+                new_data[1].append(data['REPROVACOES_EM'][i])
+            if not(data['REPROVACOES_MF'][i] <=0 or data['REPROVACOES_MF'][i] >0) :
                 new_data[2].append(0)
             else:
-                new_data[2].append(X['REPROVACOES_MF'][i])
-            if not(X['REPROVACOES_GO'][i] <=0 or X['REPROVACOES_GO'][i] >0) :
+                new_data[2].append(data['REPROVACOES_MF'][i])
+            if not(data['REPROVACOES_GO'][i] <=0 or data['REPROVACOES_GO'][i] >0) :
                 new_data[3].append(40)
             else:
-                new_data[3].append(X['REPROVACOES_GO'][i])
-            if not(X['NOTA_DE'][i] <=0 or X['NOTA_DE'][i] >0) :
+                new_data[3].append(data['REPROVACOES_GO'][i])
+            if not(data['NOTA_DE'][i] <=0 or data['NOTA_DE'][i] >0) :
                 new_data[4].append(0)
             else:
-                new_data[4].append(X['NOTA_DE'][i])
-            if not(X['NOTA_EM'][i] <=0 or X['NOTA_EM'][i] >0) :
+                new_data[4].append(data['NOTA_DE'][i])
+            if not(data['NOTA_EM'][i] <=0 or data['NOTA_EM'][i] >0) :
                 new_data[5].append(0)
             else:
-                new_data[5].append(X['NOTA_EM'][i])
-            if not(X['NOTA_MF'][i] <=0 or X['NOTA_MF'][i] >0) :
+                new_data[5].append(data['NOTA_EM'][i])
+            if not(data['NOTA_MF'][i] <=0 or data['NOTA_MF'][i] >0) :
                 new_data[6].append(0)
             else:
-                new_data[6].append(X['NOTA_MF'][i])
-            if not(X['NOTA_GO'][i] <=0 or X['NOTA_GO'][i] >0) :
+                new_data[6].append(data['NOTA_MF'][i])
+            if not(data['NOTA_GO'][i] <=0 or data['NOTA_GO'][i] >0) :
                 new_data[7].append(0)
             else:
-                new_data[7].append(X['NOTA_GO'][i])
-            if not(X['H_AULA_PRES'][i] <=0 or X['H_AULA_PRES'][i] >0) :
+                new_data[7].append(data['NOTA_GO'][i])
+            if not(data['H_AULA_PRES'][i] <=0 or data['H_AULA_PRES'][i] >0) :
                 new_data[8].append(0)
             else:
-                new_data[8].append(X['H_AULA_PRES'][i])
-            if not(X['TAREFAS_ONLINE'][i] <=0 or X['TAREFAS_ONLINE'][i] >0) :
+                new_data[8].append(data['H_AULA_PRES'][i])
+            if not(data['TAREFAS_ONLINE'][i] <=0 or data['TAREFAS_ONLINE'][i] >0) :
                 new_data[9].append(0)
             else:
-                new_data[9].append(X['TAREFAS_ONLINE'][i])
-            if not(X['FALTAS'][i] <=0 or X['FALTAS'][i] >0) :
+                new_data[9].append(data['TAREFAS_ONLINE'][i])
+            if not(data['FALTAS'][i] <=0 or data['FALTAS'][i] >0) :
                 new_data[10].append(0)
             else:
-                new_data[10].append(X['FALTAS'][i])
+                new_data[10].append(data['FALTAS'][i])
         
         self=new_data
-        data = X.copy()
         
         data['REPROVACOES_DE']=new_data[0]
         data['REPROVACOES_EM']=new_data[1]
