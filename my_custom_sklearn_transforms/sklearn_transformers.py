@@ -105,31 +105,79 @@ class CustomScaler(BaseEstimator,TransformerMixin):
         # return a data frame which contains all scaled features and all 'not scaled' features
         # use the original order (that you recorded in the beginning)
         return pd.concat([X_not_scaled, X_scaled], axis=1)[init_col_order]
-   
-
     
-class TrainTest():
+    
+class DadosNulos():
+    def __init__(self, columns):
+        self=None
+
+    def fit(self, X, y=None):
+        return self
+    
     def transform(self, X):
-        data=X.copy()
+       
+        new_data=[[],[],[],[],[],[],[],[],[],[],[]]
         
-        #Transformando os dados em numpy.array
-        data=np.array(data)
-        inputs=data[:,:-1]
-        targets=data[:,-1]
+
+        for i in range(len(X['REPROVACOES_DE'])):
+            if not(X['REPROVACOES_DE'][i] <=0 or X['REPROVACOES_DE'][i] >0) :
+                new_data[0].append(0)
+            else:
+                new_data[0].append(X['REPROVACOES_DE'][i])
+            if not(X['REPROVACOES_EM'][i] <=0 or X['REPROVACOES_EM'][i] >0) :
+                new_data[1].append(0)
+            else:
+                new_data[1].append(X['REPROVACOES_EM'][i])
+            if not(X['REPROVACOES_MF'][i] <=0 or X['REPROVACOES_MF'][i] >0) :
+                new_data[2].append(0)
+            else:
+                new_data[2].append(X['REPROVACOES_MF'][i])
+            if not(X['REPROVACOES_GO'][i] <=0 or X['REPROVACOES_GO'][i] >0) :
+                new_data[3].append(40)
+            else:
+                new_data[3].append(X['REPROVACOES_GO'][i])
+            if not(X['NOTA_DE'][i] <=0 or X['NOTA_DE'][i] >0) :
+                new_data[4].append(0)
+            else:
+                new_data[4].append(X['NOTA_DE'][i])
+            if not(X['NOTA_EM'][i] <=0 or X['NOTA_EM'][i] >0) :
+                new_data[5].append(0)
+            else:
+                new_data[5].append(X['NOTA_EM'][i])
+            if not(X['NOTA_MF'][i] <=0 or X['NOTA_MF'][i] >0) :
+                new_data[6].append(0)
+            else:
+                new_data[6].append(X['NOTA_MF'][i])
+            if not(X['NOTA_GO'][i] <=0 or X['NOTA_GO'][i] >0) :
+                new_data[7].append(0)
+            else:
+                new_data[7].append(X['NOTA_GO'][i])
+            if not(X['H_AULA_PRES'][i] <=0 or X['H_AULA_PRES'][i] >0) :
+                new_data[8].append(0)
+            else:
+                new_data[8].append(X['H_AULA_PRES'][i])
+            if not(X['TAREFAS_ONLINE'][i] <=0 or X['TAREFAS_ONLINE'][i] >0) :
+                new_data[9].append(0)
+            else:
+                new_data[9].append(X['TAREFAS_ONLINE'][i])
+            if not(X['FALTAS'][i] <=0 or X['FALTAS'][i] >0) :
+                new_data[10].append(0)
+            else:
+                new_data[10].append(X['FALTAS'][i])
         
-        #Shuffle the data
-        shuffled_indices=np.arange(inputs.shape[0])
-        np.random.shuffle(shuffled_indices)
-        shuffled_inputs=inputs[shuffled_indices]
-        shuffled_targets=targets[shuffled_indices]
+        self=new_data
+        data = X.copy()
         
-        #Dividindo os dados em: train, test
-        samples_count=inputs.shape[0]
-        train_samples_count=int(0.7*samples_count)
-        x_train=shuffled_inputs[:train_samples_count]
-        y_train=shuffled_targets[:train_samples_count]
-        x_test=shuffled_inputs[train_samples_count:]
-        y_test=shuffled_targets[train_samples_count:]
-            
+        data['REPROVACOES_DE']=new_data[0]
+        data['REPROVACOES_EM']=new_data[1]
+        data['REPROVACOES_MF']=new_data[2]
+        data['REPROVACOES_GO']=new_data[3]
+        data['NOTA_DE']=new_data[4]
+        data['NOTA_EM']=new_data[5]
+        data['NOTA_MF']=new_data[6]
+        data['NOTA_GO']=new_data[7]
+        data['H_AULA_PRES']=new_data[8]
+        data['TAREFAS_ONLINE']=new_data[9]
+        data['FALTAS']=new_data[10]
         
-        return x_train, y_train, x_test,y_test
+        return data
