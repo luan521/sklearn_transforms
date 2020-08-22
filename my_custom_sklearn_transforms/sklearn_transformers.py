@@ -1,5 +1,6 @@
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.preprocessing import StandardScaler
+imports pandas as pd
 import numpy as np
 
 
@@ -27,30 +28,30 @@ class NotaZerada():
         return self
     
     def transform(self, X):
-        
+        data = X.copy()
+        data.index=range(len(data))
         nota=[[],[],[],[]]
 
-        for i in range(len(X['NOTA_DE'])):
-            if (X['REPROVACOES_DE'][i]==0 and X['NOTA_DE'][i]==0):
-                nota[0].append(100)
+        for i in range(len(data['NOTA_DE'])):
+            if (data['REPROVACOES_DE'][i]==0 and data['NOTA_DE'][i]==0):
+                nota[0].append(5.002)
             else:
-                nota[0].append(X['NOTA_DE'][i])
-            if (X['REPROVACOES_EM'][i]==0 and X['NOTA_EM'][i]==0):
-                nota[1].append(200)
+                nota[0].append(data['NOTA_DE'][i])
+            if (data['REPROVACOES_EM'][i]==0 and data['NOTA_EM'][i]==0):
+                nota[1].append(5.0861)
             else:
-                nota[1].append(X['NOTA_EM'][i])
-            if (X['REPROVACOES_MF'][i]==0 and X['NOTA_MF'][i]==0):
-                nota[2].append(300)
+                nota[1].append(data['NOTA_EM'][i])
+            if (data['REPROVACOES_MF'][i]==0 and data['NOTA_MF'][i]==0):
+                nota[2].append(4.8181)
             else:
-                nota[2].append(X['NOTA_MF'][i])
-            if (X['REPROVACOES_GO'][i]==0 and X['NOTA_GO'][i]==0):
-                nota[3].append(400)
+                nota[2].append(data['NOTA_MF'][i])
+            if (data['REPROVACOES_GO'][i]==0 and data['NOTA_GO'][i]==0):
+                nota[3].append(4.3238)
             else:
-                nota[3].append(X['NOTA_GO'][i])
+                nota[3].append(data['NOTA_GO'][i])
         
         self=nota
         
-        data = X.copy()
         data['NOTA_DE']=nota[0]
         data['NOTA_EM']=nota[1]
         data['NOTA_MF']=nota[2]
